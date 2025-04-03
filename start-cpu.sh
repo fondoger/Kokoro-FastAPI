@@ -3,6 +3,7 @@
 # ./start-gpu.sh
 # ./start-gpu.sh 8881
 PORT=${1:-8880}
+NoInstall=${2:-false}
 
 # Get project root directory
 PROJECT_ROOT=$(pwd)
@@ -19,8 +20,10 @@ export ESPEAK_DATA_PATH=/usr/lib/x86_64-linux-gnu/espeak-ng-data
 
 # Run FastAPI with CPU extras using uv run
 # Note: espeak may still require manual installation,
-uv pip install -e ".[cpu]"
-uv run --no-sync python docker/scripts/download_model.py --output api/src/models/v1_0
+if [ "$NoInstall" = false ]; then
+    uv pip install -e ".[cpu]"
+    uv run --no-sync python docker/scripts/download_model.py --output api/src/models/v1_0
+fi
 
 # Apply the misaki patch to fix possible EspeakWrapper issue in older versions
 # echo "Applying misaki patch..."
