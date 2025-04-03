@@ -1,9 +1,10 @@
 import threading
 import time
+import os
 from datetime import datetime
 
 import psutil
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 import torch
 
 try:
@@ -15,6 +16,13 @@ except ImportError:
 
 router = APIRouter(tags=["debug"])
 
+@router.post("/debug/restart")
+async def restart(background_tasks: BackgroundTasks):
+    """Restart the FastAPI server."""
+
+    background_tasks.add_task(lambda: os._exit(0))
+
+    return { "status": "ok" }
 
 @router.get("/debug/threads")
 async def get_thread_info():
