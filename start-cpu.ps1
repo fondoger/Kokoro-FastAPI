@@ -1,5 +1,5 @@
-# .\start-gpu.ps1
-# .\start-gpu.ps1 -Port 8881
+# .\start-cpu.ps1
+# .\start-cpu.ps1 -Port 8881 -NoInstall $true
 param(
     [int]$Port = 8880,
     [bool]$NoInstall = $false
