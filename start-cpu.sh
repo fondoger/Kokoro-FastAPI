@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ./start-gpu.sh
-# ./start-gpu.sh 8881
+# ./start-gpu.sh 8881 true
 PORT=${1:-8880}
 NoInstall=${2:-false}
 
