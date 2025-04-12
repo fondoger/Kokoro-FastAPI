@@ -114,7 +114,7 @@ def get_sentence_info(
         # Eg: "This is a test sentence, [silent](/1s/) with silence for one second."
         while match := CUSTOM_PHONEME_SILENCE_TAG.search(sentence):
             match_prefix = sentence[:match.start()] # `This is a test sentence, `
-            match_text = match.group(0)             # `[silent](/1s/)`
+            match_text = match.group(0)             # `[silent 0.5s]`
             match_suffix = sentence[match.end():]   # ` with silence for one second.`
             if match_prefix.strip():
                 tokens = process_text_chunk(match_prefix.strip())
