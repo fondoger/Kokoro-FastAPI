@@ -9,17 +9,17 @@ import torch
 
 class AudioChunk:
     """Class for audio chunks returned by model backends"""
-
+    
     def __init__(
         self,
-        audio: np.ndarray,
-        word_timestamps: Optional[List] = [],
+        audio: np.ndarray, # dtype: np.int16
+        word_timestamps: Optional[List] = None, # Using None instead of `[]` to avoid reference to the same empty list.
         output: Optional[Union[bytes, np.ndarray]] = b"",
     ):
         self.audio = audio
-        self.word_timestamps = word_timestamps
+        self.word_timestamps = word_timestamps if word_timestamps is not None else []
         self.output = output
-
+        
     @staticmethod
     def combine(audio_chunk_list: List):
         output = AudioChunk(
